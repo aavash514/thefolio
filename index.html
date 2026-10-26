@@ -257,7 +257,7 @@ function wirePager(prefix,labels,key){
   var n=labels.length; if(n===0) return;
   function idx(){return Math.max(0,Math.min(n-1,Math.round(strip.scrollLeft/Math.max(1,strip.clientWidth))));}
   function draw(){var i=idx(); state[key]=i; info.textContent="Page "+(i+1)+" of "+n+(labels[i]?" · "+labels[i]:""); prev.disabled=i<=0; next.disabled=i>=n-1;}
-  function go(d){var i=Math.max(0,Math.min(n-1,idx()+d)); strip.scrollTo({left:i*strip.clientWidth,behavior:"smooth"});}
+  function go(d){var i=Math.max(0,Math.min(n-1,idx()+d)); strip.scrollTo({left:i*strip.clientWidth,behavior:"smooth"}); var top=strip.getBoundingClientRect().top+window.scrollY; window.scrollTo({top:Math.max(0,top-4),behavior:"smooth"});}
   prev.addEventListener("click",function(){go(-1);});
   next.addEventListener("click",function(){go(1);});
   var tick=false;
