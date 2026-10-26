@@ -81,11 +81,24 @@ section.fieldsec{margin-top:2.5rem}
 .byline .readbtn{min-height:36px;padding:.2rem .25rem;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
 .byline .readbtn.isread{color:var(--dim)}
 .byline .readbtn:not(.isread){text-decoration:underline;text-underline-offset:4px}
-.cols{column-gap:2.5rem;column-rule:1px solid var(--border)}
-@media(min-width:768px){.cols{columns:2}}
-@media(min-width:1280px){.cols{columns:3}}
-.cols.mt{margin-top:2.25rem}
-article.story{break-inside:avoid;border-bottom:1px solid var(--border);padding-bottom:1.5rem;margin-bottom:1.75rem}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-top:1.75rem}
+.pbtn{min-height:44px;padding:.45rem .9rem;border:1px solid var(--text);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--bg);white-space:nowrap}
+.pbtn:disabled{opacity:.3;cursor:default}
+.pinfo{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:center}
+.sheets{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-top:3px solid var(--text);margin-top:.75rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.sheet{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;padding:.25rem .35rem 0}
+@media(min-width:640px){.sheet{padding:.25rem .75rem 0}}
+.sheet.fieldsec{margin-top:0}
+.sheet .fieldhead{border-top:none}
+.storygrid{display:grid;grid-template-columns:1fr;margin-top:2rem}
+@media(min-width:768px){.storygrid{grid-template-columns:repeat(2,1fr);column-gap:2.5rem}}
+@media(min-width:1280px){.storygrid{grid-template-columns:repeat(3,1fr)}}
+.endsheet{text-align:center}
+.endsheet .endnote{font-style:italic;color:var(--dim);font-size:16px;line-height:1.6;margin:2rem 0 0}
+.bookpage{max-width:44rem;margin-left:auto;margin-right:auto;border-bottom:none}
+.booksintro{text-align:center;font-style:italic;color:var(--dim);font-size:16px;line-height:1.6;margin:1rem auto 0;max-width:42rem}
+article.story{display:flex;flex-direction:column;border-bottom:1px solid var(--border);padding-bottom:1.25rem;margin-bottom:1.75rem}
+article.story .byline{margin-top:auto;padding-top:.75rem}
 article.story h3{font-family:var(--font-display);font-size:22px;font-weight:700;line-height:1.2;margin:0}
 article.story h3.it{font-style:italic}
 article.story p.brief{font-size:16px;line-height:1.65;text-align:justify;hyphens:auto;margin:.55rem 0 0}
@@ -219,7 +232,12 @@ var BOOKS=[
  {id:"bk2",title:"Frankenstein; or, The Modern Prometheus",author:"Mary Wollstonecraft Shelley",genres:["fiction","horror","science-fiction"],subjects:["Gothic fiction","Frankenstein's monster — Fiction","Victor Frankenstein — Fiction"],url:"https://www.gutenberg.org/ebooks/84.html.images",about:"Shelley's Gothic novel of 1818 tells of Victor Frankenstein, a young scientist who creates a living creature from assembled body parts in an unorthodox experiment. When the creature awakens, Victor flees in horror and abandons his creation. The conscious being must navigate a world that fears him, learning language and seeking connection, only to face repeated rejection. Embittered and alone, the creature turns back on the maker who left him. The book is both a horror tale and a study of responsibility: what a creator owes the thing he made. It suits readers drawn to Gothic fiction, early science fiction and stories told through letters and nested accounts.",opening:"To Mrs. Saville, England. St. Petersburgh, Dec. 11th, 17—. You will rejoice to hear that no disaster has accompanied the commencement of an enterprise which you have regarded with such evil forebodings."},
  {id:"bk3",title:"Moby Dick; or, The Whale",author:"Herman Melville",genres:["fiction","adventure"],subjects:["Adventure stories","Captain Ahab — Fiction","Whaling — Fiction"],url:"https://www.gutenberg.org/ebooks/2701.html.images",about:"Melville's epic novel of 1851 is narrated by the sailor Ishmael. It follows the obsessive quest of Captain Ahab, who commands the whaling ship Pequod in pursuit of Moby Dick, a giant white sperm whale that destroyed his leg. Ahab's monomaniacal hunt for vengeance drives the ship and its diverse crew across the world's oceans. The narrative blends realistic whaling detail with explorations of good, evil, fate and human nature. It is regarded as a cornerstone of American literature. The book suits patient readers who want an adventure story that keeps opening into meditation on obsession and the sea.",opening:"Call me Ishmael. Some years ago — never mind how long precisely — having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world."},
  {id:"bk4",title:"Alice's Adventures in Wonderland",author:"Lewis Carroll",genres:["fiction","fantasy","childrens"],subjects:["Children's stories","Fantasy fiction","Alice — Juvenile fiction"],url:"https://www.gutenberg.org/ebooks/11.html.images",about:"Carroll's children's novel of 1865 begins when a curious girl named Alice spots a White Rabbit with a pocket watch. She tumbles down a rabbit hole into an extraordinary fantasy world filled with peculiar anthropomorphic creatures. The book is a pioneering work of literary nonsense that plays with logic and language. Illustrated by John Tenniel, it helped transform children's literature from didactic instruction toward delight. Its subjects are listed as children's stories and fantasy fiction, and it has stayed in print for readers of every age. It suits anyone who enjoys wordplay, absurd encounters and a story that treats a child's questions seriously.",opening:"Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it."},
- {id:"bk5",title:"Dracula",author:"Bram Stoker",genres:["fiction","horror"],subjects:["Gothic fiction","Count Dracula — Fiction","Epistolary fiction"],url:"https://www.gutenberg.org/ebooks/345.html.images",about:"Stoker's Gothic horror novel of 1897 is told through letters, diary entries and newspaper articles. It follows solicitor Jonathan Harker's terrifying encounter with Count Dracula in Transylvania. When the vampire Count travels to England and begins preying on victims in Whitby, a small group led by Professor Abraham Van Helsing must hunt him down. The epistolary form lets the danger assemble piece by piece from ordinary documents. The book became the centrepiece of vampire literature and profoundly shaped popular culture's picture of the vampire. It suits readers who like their horror built slowly, in journals and letters, toward a pursuit across two countries.",opening:"3 May. Bistritz. — Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late."}
+ {id:"bk5",title:"Dracula",author:"Bram Stoker",genres:["fiction","horror"],subjects:["Gothic fiction","Count Dracula — Fiction","Epistolary fiction"],url:"https://www.gutenberg.org/ebooks/345.html.images",about:"Stoker's Gothic horror novel of 1897 is told through letters, diary entries and newspaper articles. It follows solicitor Jonathan Harker's terrifying encounter with Count Dracula in Transylvania. When the vampire Count travels to England and begins preying on victims in Whitby, a small group led by Professor Abraham Van Helsing must hunt him down. The epistolary form lets the danger assemble piece by piece from ordinary documents. The book became the centrepiece of vampire literature and profoundly shaped popular culture's picture of the vampire. It suits readers who like their horror built slowly, in journals and letters, toward a pursuit across two countries.",opening:"3 May. Bistritz. — Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late."},
+ {id:"bk6",title:"The Adventures of Sherlock Holmes",author:"Arthur Conan Doyle",genres:["fiction","mystery"],subjects:["Detective and mystery stories, English","Holmes, Sherlock — Fiction","Watson, John H. — Fiction"],url:"https://www.gutenberg.org/ebooks/1661.html.images",about:"Doyle's collection of twelve short stories, published in 1892, gathers some of the most famous cases of Sherlock Holmes, narrated by his friend Dr. John Watson. It opens with 'A Scandal in Bohemia', the one case in which Holmes is outwitted, by Irene Adler, and runs through 'The Adventure of the Blue Carbuncle' and 'The Adventure of the Copper Beeches'. Each story is a small machine of observation and deduction: a client, a puzzle, and a chain of reasoning that Watson's readers are invited to follow and fail to match. The collection fixed the modern shape of the detective story. It suits readers who want mystery in short, complete doses rather than one long novel.",opening:"To Sherlock Holmes she is always the woman. I have seldom heard him mention her under any other name. In his eyes she eclipses and predominates the whole of her sex."},
+ {id:"bk7",title:"The Importance of Being Earnest",author:"Oscar Wilde",genres:["fiction","drama","humor"],subjects:["Comedies","England — Drama","Wit and humour, Dramatic"],url:"https://www.gutenberg.org/ebooks/844.html.images",about:"Wilde's comic play of 1895, subtitled 'A Trivial Comedy for Serious People', follows two friends, Jack Worthing and Algernon Moncrieff, who each invent a double life to escape social obligation. Jack's imaginary brother Ernest lets him be respectable in the country and wild in town, until both men fall in love with women determined to marry a man named Ernest. Mistaken identities, a handbag, and a baby misplaced at a railway station carry the plot to its absurd resolution. Nearly every line is an epigram turned upside down. It suits readers who like their satire of Victorian manners light on its feet and quotable on every page.",opening:"Algernon. Did you hear what I was playing, Lane? Lane. I didn't think it polite to listen, sir."},
+ {id:"bk8",title:"The Autobiography of Benjamin Franklin",author:"Benjamin Franklin",genres:["biography","history"],subjects:["Franklin, Benjamin, 1706–1790","Statesmen — United States — Biography","Scientists — United States — Biography"],url:"https://www.gutenberg.org/ebooks/20203.html.images",about:"Franklin wrote his autobiography in parts between 1771 and 1790, addressing it to his son, and it was published after his death. It traces his rise from a runaway apprentice printer in Boston to a successful Philadelphia publisher, civic organiser and man of science. Famous episodes include his arrival in Philadelphia carrying three rolls of bread, his scheme for arriving at moral perfection one virtue at a time, and the founding of a lending library. It is as much a manual of self-making as a memoir, written in a plain, practical voice. It suits readers interested in early American life, printing, and the habits of a deliberately self-improving mind.",opening:"Dear Son, I have ever had pleasure in obtaining any little anecdotes of my ancestors. You may remember the inquiries I made among the remains of my relations when you were with me in England, and the journey I undertook for that purpose."},
+ {id:"bk9",title:"Meditations",author:"Marcus Aurelius",genres:["philosophy","history"],subjects:["Ethics","Stoics","Philosophy, Ancient"],url:"https://www.gutenberg.org/ebooks/2680.html.images",about:"The Meditations are the private notebooks of Marcus Aurelius, the Roman emperor who ruled from 161 to 180 AD, written in Greek during campaigns on the empire's northern frontier and never intended for publication. In short passages he rehearses Stoic discipline: to meet insult without anger, to treat each day as a gift, and to remember that fame and life itself are brief. The text survives because others copied a working journal rather than a finished treatise, which gives it an unusually direct, self-correcting voice. This edition is George Long's classic English translation. It suits readers who want philosophy as daily practice rather than system, and a window into how a ruler tried to govern himself.",opening:"Begin the morning by saying to thyself, I shall meet with the busy-body, the ungrateful, arrogant, deceitful, envious, unsocial."},
+ {id:"bk10",title:"Leaves of Grass",author:"Walt Whitman",genres:["poetry"],subjects:["American poetry","Poetry"],url:"https://www.gutenberg.org/ebooks/1322.html.images",about:"Whitman first published Leaves of Grass in 1855 as a slim volume of twelve poems, printing and typesetting much of it himself, and spent the rest of his life expanding it into the large book of American poetry it became. Its free verse broke with the rhymed forms of its day, and its subject was everything: the self, the body, cities, grass, death and the democratic crowd. 'Song of Myself', its longest poem, remains the centre of the collection. The voice is expansive and deliberately unbuttoned, addressing the reader as an equal. It suits readers who want poetry of appetite and openness rather than compression.",opening:"I celebrate myself, and sing myself, And what I assume you shall assume, For every atom belonging to me as good belongs to you."}
 ];
 
 var state={
@@ -229,8 +247,26 @@ var state={
   readStories:{},
   readBooks:{},
   finished:false,
-  picker:null
+  picker:null,
+  paperPage:0,
+  bookPage:0
 };
+function wirePager(prefix,labels,key){
+  var strip=document.getElementById(prefix+"-sheets"); if(!strip) return;
+  var info=document.getElementById(prefix+"-pinfo"), prev=document.getElementById(prefix+"-prev"), next=document.getElementById(prefix+"-next");
+  var n=labels.length; if(n===0) return;
+  function idx(){return Math.max(0,Math.min(n-1,Math.round(strip.scrollLeft/Math.max(1,strip.clientWidth))));}
+  function draw(){var i=idx(); state[key]=i; info.textContent="Page "+(i+1)+" of "+n+(labels[i]?" · "+labels[i]:""); prev.disabled=i<=0; next.disabled=i>=n-1;}
+  function go(d){var i=Math.max(0,Math.min(n-1,idx()+d)); strip.scrollTo({left:i*strip.clientWidth,behavior:"smooth"});}
+  prev.addEventListener("click",function(){go(-1);});
+  next.addEventListener("click",function(){go(1);});
+  var tick=false;
+  strip.addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;draw();});}});
+  requestAnimationFrame(function(){var i=Math.max(0,Math.min(state[key]||0,n-1)); strip.scrollTo({left:i*strip.clientWidth,behavior:"instant"}); draw();});
+}
+function pagerHTML(prefix){
+  return '<div class="pager"><button type="button" class="pbtn" id="'+prefix+'-prev" aria-label="Previous page">\u2190 Prev page</button><span class="pinfo" id="'+prefix+'-pinfo" aria-live="polite"></span><button type="button" class="pbtn" id="'+prefix+'-next" aria-label="Next page">Next page \u2192</button></div>';
+}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function visibleStories(){return STORIES.filter(function(s){return state.selectedFields.indexOf(s.field)>=0;});}
 function visibleBooks(){
@@ -275,56 +311,61 @@ function renderPaper(){
   visibleStories().forEach(function(s){(groups[s.field]=groups[s.field]||[]).push(s);});
   var order=FIELDS.map(function(f){return f.id;}).filter(function(id){return groups[id];});
   if(order.length===0){root.innerHTML='<p class="empty">No sections in your view. Open Fields and add at least one.</p>';return;}
-  var html="";
+  var sheets=[], labels=[];
   if(state.finished){
-    html+='<div class="donebox"><p class="big">DONE</p><p>You finished this edition in your view. Nothing more is coming today — the paper ends here. Your finish lives only in this visit; the published edition above is unchanged for everyone else.</p><button type="button" class="btn link" id="reopen-btn">Reopen this edition in your view</button></div>';
+    sheets.push('<section class="sheet"><div class="donebox"><p class="big">DONE</p><p>You finished this edition in your view. Nothing more is coming today — the paper ends here. Your finish lives only in this visit; the published edition is unchanged for everyone else.</p><button type="button" class="btn link" id="reopen-btn">Reopen this edition in your view</button></div></section>');
+    labels.push("Finished");
   }
   order.forEach(function(fid,si){
     var list=groups[fid];
-    html+='<section class="fieldsec" aria-label="'+esc(FIELD_LABEL[fid])+'"><div class="fieldhead"><div class="row"><span class="side">'+list.length+(list.length===1?' story':' stories')+'</span><h2>'+esc(FIELD_LABEL[fid])+'</h2><span class="side right">Section '+String.fromCharCode(65+si)+'</span></div></div>';
+    var h='<section class="sheet fieldsec" aria-label="'+esc(FIELD_LABEL[fid])+'"><div class="fieldhead"><div class="row"><span class="side">'+list.length+(list.length===1?' story':' stories')+'</span><h2>'+esc(FIELD_LABEL[fid])+'</h2><span class="side right">Section '+String.fromCharCode(65+si)+'</span></div></div>';
     var lead = si===0 ? list[0] : null;
     var rest = lead ? list.slice(1) : list;
     if(lead){
-      html+='<article class="lead'+(state.readStories[lead.id]?' is-read':'')+'"><h3>'+esc(lead.title)+'</h3>'+bylineHTML(lead,false,true)+'<div class="briefbox"><p class="brief">'+esc(lead.brief)+'</p></div></article>';
+      h+='<article class="lead'+(state.readStories[lead.id]?' is-read':'')+'"><h3>'+esc(lead.title)+'</h3>'+bylineHTML(lead,false,true)+'<div class="briefbox"><p class="brief">'+esc(lead.brief)+'</p></div></article>';
     }
     if(rest.length>0){
-      html+='<div class="cols'+(lead?' mt':'')+'" style="margin-top:'+(lead?'2.25rem':'1.75rem')+'">';
+      h+='<div class="storygrid">';
       rest.forEach(function(s){
-        html+='<article class="story'+(state.readStories[s.id]?' is-read':'')+'"><h3>'+esc(s.title)+'</h3><p class="brief">'+esc(s.brief)+'</p>'+bylineHTML(s,false)+'</article>';
+        h+='<article class="story'+(state.readStories[s.id]?' is-read':'')+'"><h3>'+esc(s.title)+'</h3><p class="brief">'+esc(s.brief)+'</p>'+bylineHTML(s,false)+'</article>';
       });
-      html+='</div>';
+      h+='</div>';
     }
-    html+='</section>';
+    h+='</section>';
+    sheets.push(h); labels.push(FIELD_LABEL[fid]);
   });
-  html+='<section class="fieldsec" style="border-top:1px solid var(--border);padding-top:1.25rem;text-align:center"><p style="font-style:italic;color:var(--dim);margin:0">This edition\u2019s '+BOOKS.length+' books live in their own section.</p><button type="button" class="btn link" id="goto-books" style="font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:13px">Open the Books tab \u2192</button></section>';
+  var fin='<section class="sheet endsheet"><p class="endnote">This edition\u2019s '+BOOKS.length+' books live in their own section.</p><button type="button" class="btn link" id="goto-books" style="font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:13px">Open the Books tab \u2192</button>';
   if(!state.finished){
-    html+='<div class="finishwrap"><div class="doublerule" aria-hidden="true"></div><div style="padding-top:1.5rem"><button type="button" class="btn solid" id="finish-btn">Finish this edition in your view</button><p>Marks every story in your view read, for this visit only.</p></div></div>';
+    fin+='<div class="finishwrap"><div class="doublerule" aria-hidden="true"></div><div style="padding-top:1.5rem"><button type="button" class="btn solid" id="finish-btn">Finish this edition in your view</button><p>Marks every story in your view read, for this visit only.</p></div></div>';
   }
-  root.innerHTML=html;
-  var gb=document.getElementById("goto-books"); if(gb) gb.addEventListener("click",function(){state.view="books";closePanels();render();window.scrollTo(0,0);});
-  var fb=document.getElementById("finish-btn"); if(fb) fb.addEventListener("click",function(){visibleStories().forEach(function(s){state.readStories[s.id]=true;});state.finished=true;render();window.scrollTo(0,0);});
-  var rb=document.getElementById("reopen-btn"); if(rb) rb.addEventListener("click",function(){state.finished=false;render();});
+  fin+='</section>';
+  sheets.push(fin); labels.push("End of edition");
+  root.innerHTML=pagerHTML("paper")+'<div class="sheets" id="paper-sheets" tabindex="0" aria-label="Edition pages. Scroll sideways, swipe, or use the Prev and Next page buttons to turn pages.">'+sheets.join("")+'</div>';
+  wirePager("paper",labels,"paperPage");
+  var gb=document.getElementById("goto-books"); if(gb) gb.addEventListener("click",function(){state.view="books";state.bookPage=0;closePanels();render();window.scrollTo(0,0);});
+  var fb=document.getElementById("finish-btn"); if(fb) fb.addEventListener("click",function(){visibleStories().forEach(function(s){state.readStories[s.id]=true;});state.finished=true;state.paperPage=0;render();window.scrollTo(0,0);});
+  var rb=document.getElementById("reopen-btn"); if(rb) rb.addEventListener("click",function(){state.finished=false;state.paperPage=0;render();});
   bindReadButtons(root);
 }
 function renderBooks(){
   var root=document.getElementById("books-root");
   var list=visibleBooks();
   var html='<div class="panel" style="border-top:none;margin-top:1.25rem"><div class="fieldhead"><div class="row"><span class="side">'+BOOKS.length+' books</span><h2>Books</h2><span class="side right">Sunday, October 25, 2026</span></div></div></div>'
-    +'<p style="text-align:center;font-style:italic;color:var(--dim);font-size:16px;line-height:1.6;margin:1rem auto 0;max-width:42rem">Five classics a day — each explained properly, what it is about, its themes, and who it suits, with a taste of its opening lines. Free to read in full at Project Gutenberg. Use Genres above to filter this list in your view only.</p>';
+    +'<p class="booksintro">Ten classics a day, one to a page — each explained properly, what it is about, its themes, and who it suits, with a taste of its opening lines. Free to read in full at Project Gutenberg. Use Genres above to filter these pages in your view only.</p>';
   if(list.length===0){
-    html+='<p class="empty">No books match the genres in your view. Clear genres to see all five classics.</p>';
+    html+='<p class="empty">No books match the genres in your view. Clear genres to see all ten classics.</p>';
   } else {
-    html+='<div class="cols" style="margin-top:1.75rem">';
-    list.forEach(function(b){
-      html+='<article class="story'+(state.readBooks[b.id]?' is-read':'')+'"><h3 class="it">'+esc(b.title)+'</h3><p class="authorline">by '+esc(b.author)+'</p>'
+    var sheets=list.map(function(b){
+      return '<section class="sheet"><article class="story bookpage'+(state.readBooks[b.id]?' is-read':'')+'"><h3 class="it">'+esc(b.title)+'</h3><p class="authorline">by '+esc(b.author)+'</p>'
         +'<p class="aboutlabel">About this book</p><p class="brief">'+esc(b.about)+'</p>'
         +'<figure class="opening"><figcaption>Opening lines</figcaption><blockquote>'+esc(b.opening)+'</blockquote></figure>'
         +(b.subjects.length?'<p class="subjects">'+esc(b.subjects.join(" · "))+'</p>':'')
-        +bylineHTML(b,true)+'</article>';
+        +bylineHTML(b,true)+'</article></section>';
     });
-    html+='</div>';
+    html+=pagerHTML("books")+'<div class="sheets" id="books-sheets" tabindex="0" aria-label="Book pages. Scroll sideways, swipe, or use the Prev and Next page buttons to turn pages.">'+sheets.join("")+'</div>';
   }
   root.innerHTML=html;
+  if(list.length>0) wirePager("books",list.map(function(b){return b.title;}),"bookPage");
   bindReadButtons(root);
 }
 function bindReadButtons(root){
@@ -368,6 +409,7 @@ function openFields(){
     var save=document.getElementById("save-fields");
     if(save) save.addEventListener("click",function(){
       state.selectedFields=FIELDS.map(function(f){return f.id;}).filter(function(id){return draft.indexOf(id)>=0;});
+      state.paperPage=0;
       closePicker(); window.scrollTo(0,0);
     });
   }
@@ -380,7 +422,7 @@ function openGenres(){
   var root=document.getElementById("panel-root");
   var draft=state.selectedGenres.slice();
   function draw(){
-    var html='<div class="panel" style="max-width:42rem;margin-left:auto;margin-right:auto"><h2>Your book genres</h2><p class="intro">Pick the kinds of books you want in the Books tab. Leave every genre off for a mix of all classics. Saving filters your view of today\u2019s five books to the genres you picked — your view only, for this visit; the published books do not change.</p>'
+    var html='<div class="panel" style="max-width:42rem;margin-left:auto;margin-right:auto"><h2>Your book genres</h2><p class="intro">Pick the kinds of books you want in the Books tab. Leave every genre off for a mix of all classics. Saving filters your view of today\u2019s ten books to the genres you picked — your view only, for this visit; the published books do not change.</p>'
       +'<ul class="picklist" style="margin-top:1.25rem">'+GENRES.map(function(g){return pickerRow("genre",g,draft.indexOf(g.id)>=0);}).join("")+'</ul>'
       +'<p class="foot" aria-live="polite">'+(draft.length===0?'No genres picked — all genres, a mix of classics.':'Your genres: '+GENRES.filter(function(g){return draft.indexOf(g.id)>=0;}).map(function(g){return g.label;}).join(" · "))+'</p>'
       +'<div class="panelactions"><button type="button" class="btn solid" id="save-genres">Save genres</button>'
@@ -396,6 +438,7 @@ function openGenres(){
     document.getElementById("close-panel").addEventListener("click",closePicker);
     document.getElementById("save-genres").addEventListener("click",function(){
       state.selectedGenres=GENRES.map(function(g){return g.id;}).filter(function(id){return draft.indexOf(id)>=0;});
+      state.bookPage=0;
       closePicker(); window.scrollTo(0,0);
     });
   }
@@ -412,8 +455,8 @@ function render(){
   if(!picking){ if(isBooks) renderBooks(); else renderPaper(); }
   updateMeta();
 }
-document.getElementById("nav-paper").addEventListener("click",function(){state.view="paper";state.picker=null;closePanels();render();window.scrollTo(0,0);});
-document.getElementById("nav-books").addEventListener("click",function(){state.view="books";state.picker=null;closePanels();render();window.scrollTo(0,0);});
+document.getElementById("nav-paper").addEventListener("click",function(){state.view="paper";state.picker=null;state.paperPage=0;closePanels();render();window.scrollTo(0,0);});
+document.getElementById("nav-books").addEventListener("click",function(){state.view="books";state.picker=null;state.bookPage=0;closePanels();render();window.scrollTo(0,0);});
 document.getElementById("nav-fields").addEventListener("click",function(){state.view="paper";openFields();});
 document.getElementById("nav-genres").addEventListener("click",function(){state.view="books";openGenres();});
 render();
