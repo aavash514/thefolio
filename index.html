@@ -340,7 +340,7 @@ function renderPaper(){
   }
   fin+='</section>';
   sheets.push(fin); labels.push("End of edition");
-  root.innerHTML=pagerHTML("paper")+'<div class="sheets" id="paper-sheets" tabindex="0" aria-label="Edition pages. Scroll sideways, swipe, or use the Prev and Next page buttons to turn pages.">'+sheets.join("")+'</div>';
+  root.innerHTML='<div class="sheets" id="paper-sheets" tabindex="0" aria-label="Edition pages. Scroll sideways, swipe, or use the Prev and Next page buttons to turn pages.">'+sheets.join("")+'</div>'+pagerHTML("paper");
   wirePager("paper",labels,"paperPage");
   var gb=document.getElementById("goto-books"); if(gb) gb.addEventListener("click",function(){state.view="books";state.bookPage=0;closePanels();render();window.scrollTo(0,0);});
   var fb=document.getElementById("finish-btn"); if(fb) fb.addEventListener("click",function(){visibleStories().forEach(function(s){state.readStories[s.id]=true;});state.finished=true;state.paperPage=0;render();window.scrollTo(0,0);});
@@ -362,7 +362,7 @@ function renderBooks(){
         +(b.subjects.length?'<p class="subjects">'+esc(b.subjects.join(" · "))+'</p>':'')
         +bylineHTML(b,true)+'</article></section>';
     });
-    html+=pagerHTML("books")+'<div class="sheets" id="books-sheets" tabindex="0" aria-label="Book pages. Scroll sideways, swipe, or use the Prev and Next page buttons to turn pages.">'+sheets.join("")+'</div>';
+    html+='<div class="sheets" id="books-sheets" tabindex="0" aria-label="Book pages. Scroll sideways, swipe, or use the Prev and Next page buttons to turn pages.">'+sheets.join("")+'</div>'+pagerHTML("books");
   }
   root.innerHTML=html;
   if(list.length>0) wirePager("books",list.map(function(b){return b.title;}),"bookPage");
