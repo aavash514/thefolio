@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<link rel="icon" href="data:," />
+<title>The Folio — Public Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+<style>
+:root{
+  color-scheme: light;
+  --bg:#ffffff; --text:#16130d; --dim:#5f5c55; --border:#d9d9d9; --accent:#8c2b1d;
+  --font-display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --font-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-masthead:"UnifrakturMaguntia","Playfair Display",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body)}
+a{color:var(--text)}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1rem 2.5rem}
+@media(min-width:640px){.wrap{padding:0 1.5rem 2.5rem}}
+.topstrip{display:flex;justify-content:space-between;gap:.75rem;flex-wrap:wrap;border-bottom:1px solid var(--text);padding:.4rem 0;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.masthead{text-align:center;font-family:var(--font-masthead);font-size:52px;line-height:1;padding:1rem 0 .9rem;margin:0;font-weight:400}
+@media(min-width:640px){.masthead{font-size:72px}}
+@media(min-width:1024px){.masthead{font-size:84px}}
+.doublerule{border-top:3px solid var(--text)}
+.doublerule:after{content:"";display:block;margin-top:3px;border-top:1px solid var(--text)}
+.navrow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.25rem .5rem;padding:.35rem 0}
+.navrow.tools{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.navbtn{min-height:44px;padding:.4rem .6rem;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-underline-offset:4px}
+.navbtn[aria-current="page"]{color:var(--accent);text-decoration:underline}
+.sep{color:var(--border)}
+.dateline{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.25rem 1rem;margin-top:1.25rem}
+.dateline .date{font-size:16px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0}
+.dateline .meta{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0}
+.progress{height:1px;background:var(--border);margin-top:.75rem}
+.progress>div{height:3px;background:var(--text);transform:translateY(-1px);transition:width .3s}
+.progresslabel{margin:.5rem 0 0;font-size:14px;font-style:italic;color:var(--dim)}
+.note{border:1px solid var(--border);padding:.9rem 1rem;margin-top:1rem;font-size:15px;line-height:1.55}
+.note strong{font-family:var(--font-display)}
+.panel{border-top:3px solid var(--text);margin-top:1.25rem}
+.panel h2{border-bottom:1px solid var(--text);text-align:center;font-family:var(--font-display);font-size:20px;font-weight:900;letter-spacing:.26em;text-transform:uppercase;padding:.55rem 0;margin:0}
+.panel .intro{color:var(--dim);font-size:16px;line-height:1.6;margin:1rem 0 0}
+.panel h3{border-bottom:1px solid var(--text);font-family:var(--font-display);font-size:16px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;padding-bottom:.3rem;margin:1.75rem 0 0}
+.picklist{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--border)}
+.picklist li{border-top:1px solid var(--border)}
+.picklist li:first-child{border-top:none}
+.pickrow{display:flex;width:100%;min-height:48px;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem .1rem;text-align:left}
+.pickrow .lbl{font-family:var(--font-display);font-size:18px;font-weight:700}
+.pickrow .mark{font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--dim)}
+.pickrow[aria-pressed="true"] .mark{color:var(--accent)}
+.panel .foot{font-size:14px;font-style:italic;color:var(--dim);margin:.8rem 0 0}
+.panelactions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+.panelactions .btn.solid{flex:1}
+.btn{min-height:48px;padding:.6rem 1.2rem;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.btn.solid{background:var(--text);color:var(--bg)}
+.btn.link{text-decoration:underline;text-underline-offset:4px;text-transform:none;letter-spacing:0;font-size:15px}
+section.fieldsec{margin-top:2.5rem}
+.fieldhead{border-top:3px solid var(--text)}
+.fieldhead .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:.75rem;border-bottom:1px solid var(--text);padding:.5rem 0}
+.fieldhead h2{text-align:center;font-family:var(--font-display);font-size:20px;font-weight:900;letter-spacing:.26em;text-transform:uppercase;margin:0}
+.fieldhead .side{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.fieldhead .side.right{justify-self:end}
+@media(max-width:639px){.fieldhead .side{display:none}.fieldhead .row{grid-template-columns:1fr}.fieldhead h2{text-align:center}}
+.lead{margin-top:1.75rem}
+.lead h3{text-align:center;font-family:var(--font-display);font-size:36px;font-weight:900;line-height:1.05;margin:0}
+@media(min-width:640px){.lead h3{font-size:48px}}
+.lead .briefbox{border-top:1px solid var(--border);margin-top:1rem;padding-top:1rem}
+.lead p.brief{font-size:18px;line-height:1.65;text-align:justify;hyphens:auto;margin:0}
+@media(min-width:768px){.lead p.brief{columns:2;column-gap:2.5rem;column-rule:1px solid var(--border)}}
+.lead p.brief:first-letter{float:left;padding-right:.5rem;padding-top:.25rem;font-family:var(--font-display);font-size:3.2em;font-weight:900;line-height:.8}
+.byline{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem .75rem;margin-top:.75rem}
+.byline.center{justify-content:center}
+.byline a{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:4px}
+.byline .when{font-weight:400;color:var(--dim);text-transform:none;letter-spacing:0}
+.byline .readbtn{min-height:36px;padding:.2rem .25rem;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.byline .readbtn.isread{color:var(--dim)}
+.byline .readbtn:not(.isread){text-decoration:underline;text-underline-offset:4px}
+.cols{column-gap:2.5rem;column-rule:1px solid var(--border)}
+@media(min-width:768px){.cols{columns:2}}
+@media(min-width:1280px){.cols{columns:3}}
+.cols.mt{margin-top:2.25rem}
+article.story{break-inside:avoid;border-bottom:1px solid var(--border);padding-bottom:1.5rem;margin-bottom:1.75rem}
+article.story h3{font-family:var(--font-display);font-size:22px;font-weight:700;line-height:1.2;margin:0}
+article.story h3.it{font-style:italic}
+article.story p.brief{font-size:16px;line-height:1.65;text-align:justify;hyphens:auto;margin:.55rem 0 0}
+article.story .authorline{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin:.3rem 0 0}
+article.story .aboutlabel{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:1rem 0 0}
+article.story figure.opening{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.8rem 0;margin:1rem 0 0}
+article.story figure.opening figcaption{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+article.story blockquote{font-size:15px;font-style:italic;line-height:1.65;margin:.5rem 0 0}
+article.story .subjects{font-size:14px;font-style:italic;color:var(--dim);margin:.8rem 0 0}
+.is-read{opacity:.55}
+.donebox{margin-top:2rem;border:3px solid var(--accent);padding:1.5rem 1.25rem;text-align:center;transform:rotate(-1deg)}
+.donebox .big{font-family:var(--font-display);font-size:36px;font-weight:900;letter-spacing:.2em;color:var(--accent);margin:0}
+.donebox p{margin:.6rem 0 0;font-size:16px;line-height:1.6}
+.finishwrap{margin-top:3rem;text-align:center}
+.finishwrap .doublerule{text-align:left}
+.finishwrap p{font-size:14px;font-style:italic;color:var(--dim);margin:.8rem 0 0}
+footer{margin-top:3.5rem;text-align:center}
+footer p{font-size:14px;font-style:italic;color:var(--dim);margin:1rem 0 0;line-height:1.6}
+.empty{padding:2.5rem 0;text-align:center;color:var(--dim);font-size:17px;font-style:italic}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topstrip"><span>One finite edition a day</span><span>Public edition · Read-only</span><span>Text only · No video</span></div>
+    <h1 class="masthead">The Folio</h1>
+    <div class="doublerule" aria-hidden="true"></div>
+    <nav class="navrow" aria-label="Primary sections">
+      <button type="button" class="navbtn" id="nav-paper" aria-current="page">Today's paper</button>
+      <span class="sep" aria-hidden="true">|</span>
+      <button type="button" class="navbtn" id="nav-books">Books</button>
+    </nav>
+    <nav class="navrow tools" aria-label="View tools">
+      <button type="button" class="navbtn" id="nav-fields">Fields</button>
+      <span class="sep" aria-hidden="true">|</span>
+      <button type="button" class="navbtn" id="nav-genres">Genres</button>
+    </nav>
+  </header>
+
+  <div class="dateline">
+    <p class="date" id="edition-date">Sunday, October 25, 2026</p>
+    <p class="meta" id="edition-meta"></p>
+  </div>
+  <div class="progress" role="progressbar" id="progress" aria-label="Reading progress in this view" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill" style="width:0%"></div></div>
+  <p class="progresslabel" id="progress-label" aria-live="polite"></p>
+
+  <div class="note" id="public-note">
+    <strong>How this public paper works.</strong>
+    One edition is published for everyone, the way a newspaper site publishes its sections. Picking fields or genres below only filters what <em>you</em> see in this visit — it does not change the paper for anyone else, and nothing here can edit, delete, or rebuild the edition. Read marks work the same way: they are yours alone, for this visit only, and are gone when you leave. No account, no sign-in.
+  </div>
+
+  <div id="panel-root"></div>
+  <main id="paper-root" aria-live="off"></main>
+  <div id="books-root" hidden></div>
+
+  <footer>
+    <div class="doublerule" aria-hidden="true"></div>
+    <p>One edition a day. When it's done, it's done.<br/>Edition of Sunday, October 25, 2026 · Snapshot fetched Oct 25, 2026, America/Chicago · Briefs written from each outlet's own feed summary, with the full story linked at every byline · Books are public-domain classics from Project Gutenberg, catalogued by Gutendex.</p>
+  </footer>
+</div>
+<script>
+"use strict";
+var FIELDS=[
+ {id:"world",label:"World",group:"country"},
+ {id:"africa",label:"Africa",group:"country"},
+ {id:"asia",label:"Asia",group:"country"},
+ {id:"europe",label:"Europe",group:"country"},
+ {id:"middle-east",label:"Middle East",group:"country"},
+ {id:"americas",label:"Americas",group:"country"},
+ {id:"politics",label:"Politics",group:"scope"},
+ {id:"technology",label:"Technology",group:"scope"},
+ {id:"business",label:"Business",group:"scope"},
+ {id:"science",label:"Science",group:"scope"},
+ {id:"health",label:"Health",group:"scope"},
+ {id:"sport",label:"Sport",group:"scope"},
+ {id:"culture",label:"Culture",group:"scope"}
+];
+var FIELD_LABEL={}; FIELDS.forEach(function(f){FIELD_LABEL[f.id]=f.label;});
+var GENRES=[
+ {id:"fiction",label:"Fiction"},{id:"adventure",label:"Adventure"},{id:"mystery",label:"Mystery & Detective"},
+ {id:"romance",label:"Romance"},{id:"science-fiction",label:"Science Fiction"},{id:"fantasy",label:"Fantasy"},
+ {id:"horror",label:"Horror & Ghost Stories"},{id:"history",label:"History"},{id:"philosophy",label:"Philosophy"},
+ {id:"poetry",label:"Poetry"},{id:"drama",label:"Drama & Plays"},{id:"childrens",label:"Children's Books"},
+ {id:"humor",label:"Humour & Satire"},{id:"biography",label:"Biography & Memoir"}
+];
+var GENRE_LABEL={}; GENRES.forEach(function(g){GENRE_LABEL[g.id]=g.label;});
+var STORIES=[
+ {id:"w1",field:"world",title:"Mystery over source of Ebola infection in Nigeria fuels concern about spread of virus",source:"The Guardian",url:"https://www.theguardian.com/world/2026/oct/23/ebola-swiss-patient-nigeria-dr-congo-concerns-virus-spread",when:"Oct 23",brief:"Health officials across Africa are racing to determine how Nigeria's first Ebola patient in more than a decade became infected. Switzerland says the patient is the wife of a Swiss diplomat and is believed to have contracted the virus while travelling in Uganda. The uncertainty over the source of the infection is what fuels the concern described by officials. The case matters beyond one patient because the outbreak has now reached a fourth African country. A first case in Nigeria, Africa's most populous setting in this account, raises the stakes for tracing contacts and checking travel links. Until the chain of infection is understood, officials are treating the spread itself as the central risk."},
+ {id:"w2",field:"world",title:"Lula defeats Flávio Bolsonaro to win Brazil's presidency for a fourth term",source:"The Guardian",url:"https://www.theguardian.com/world/live/2026/oct/25/brazil-election-runoff-live-updates-flavio-bolsonaro-lula",when:"Oct 25",brief:"Luiz Inácio Lula da Silva has defeated Flávio Bolsonaro in Brazil's presidential runoff, the electoral court announced. The result elects the leftist president for a fourth non-consecutive term. The contest pitted Lula against the son of former president Jair Bolsonaro in a bitterly fought runoff. A fourth term, won non-consecutively, underlines the scale of the political comeback the result represents. The announcement came from the electoral court as live counting settled the race. Brazil now turns from the runoff itself to the government Lula will form on the strength of it."},
+ {id:"w3",field:"world",title:"Controversial US-backed vaccine trial in African newborns halted",source:"The Guardian",url:"https://www.theguardian.com/world/2026/oct/21/us-vaccine-trial-african-newborns-hepatitis-b",when:"Oct 21",brief:"A US-backed hepatitis B vaccine trial in African newborns that drew global backlash has been halted. The study, in Guinea-Bissau, was to be funded by the CDC. The lead researcher, Danish researcher Frederik Schaltz-Buchholzer, said on Wednesday it was now clear the study will not move forward in Guinea-Bissau. The halt ends a plan that had become controversial well beyond the trial site itself. Opposition centred on the trial going ahead in newborns in Guinea-Bissau with US funding behind it. With the researcher's own statement that it will not proceed, the trial is closed rather than paused."},
+ {id:"a1",field:"africa",title:"'I cannot teach you integrity': how employee theft is hurting small businesses in Africa",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/cmz98plpjzplo",when:"Oct 25",brief:"A post by the owner behind That Girl Boina, explaining why she had closed her beauty parlour, has struck a nerve with other small business owners. Her account centres on employee theft and the line that gives this story its title: integrity, she suggests, cannot be taught. The response shows her experience is not hers alone, as other owners recognised the same problem in their own businesses. For a small parlour, losses from inside the business cut directly into already thin margins. The story is therefore less about one closure than about trust as a working cost for small firms. It is the reaction from fellow owners that turns a single post into a wider account of running a small business in Africa."},
+ {id:"a2",field:"africa",title:"Death toll in Nigeria village raided by gunmen rises to 48, police say",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/cq1kdlm1ze7do",when:"Oct 25",brief:"The death toll from a raid on a remote village in Nigeria has risen to 48, police say. Unidentified gunmen on motorcycles swooped on the village on Friday. During the attack they looted shops and set houses ablaze. The rising toll reflects the scale of the assault on a community that was attacked at speed and left burning. Police are the source for the updated figure of 48 dead. No identification of the gunmen is given in the account, leaving who carried out the raid as the open question."},
+ {id:"a3",field:"africa",title:"Gabon says access to social media restored after eight-month ban",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/c6x2w0ngejneo",when:"Oct 25",brief:"Gabon says access to social media has been restored after an eight-month ban. The authorities had justified the ban by saying online content was fuelling conflict. The opposition, by contrast, condemned the ban as an abuse of power. Those two accounts framed the ban for its whole eight months: a security measure to one side, a misuse of authority to the other. Restoration now returns the platforms the ban had cut off. The announcement closes a period in which ordinary online access itself was a political question in Gabon."},
+ {id:"as1",field:"asia",title:"Singapore haze: air quality continues to improve, readings normal in all regions",source:"CNA",url:"https://www.channelnewsasia.com/singapore/haze-singapore-pm25-psi-oct-26-nea-6491766",when:"Oct 26",brief:"Air quality in Singapore continues to improve as the haze eases. PM2.5 readings remain normal in all regions, CNA reports. On Sunday evening the National Environment Agency said the 24-hour PSI for Monday was expected to be in the good to moderate band. That forecast gives residents a clear expectation for the day ahead rather than a warning. Normal readings across every region suggest the improvement is island-wide, not local. The update is a monitoring story: continued measurement, and a band forecast, rather than any new restriction."},
+ {id:"as2",field:"asia",title:"Want to get ahead at work? This behavioural psychologist turns career challenges into games",source:"CNA",url:"https://www.channelnewsasia.com/women/ritika-datta-career-development-games-6441876",when:"Oct 26",brief:"Behavioural psychologist Ritika Datta turns career challenges into games. Her work runs from discovering your strengths to creating opportunities, networking and navigating workplace politics. Each of those familiar hurdles is reframed as something that can be played through rather than simply endured. Datta tells CNA Women how female-led communities helped her get her start in Singapore's diversity, equity and inclusion space. That background sits behind the method: community first, then the game-like approach to development. The profile presents career progress as a set of learnable moves, not a matter of waiting to be noticed."},
+ {id:"as3",field:"asia",title:"NPL set to kick off with bigger stars and Rs1.5 billion in sight",source:"The Kathmandu Post",url:"https://kathmandupost.com/sports/2026/10/25/npl-set-to-kick-off-with-bigger-stars-and-rs1-5-billion-in-sight",when:"Oct 25",brief:"The Nepal Premier League is set to kick off its third season with bigger stars and Rs1.5 billion in sight. The new season brings bigger international stars than before. It also introduces a new DRS system for the T20 franchise league. Increased prize money is part of the same expansion of the league's commercial ambitions. Taken together, the signings, the technology and the money describe a league deliberately scaling up in its third year. The Kathmandu Post frames the season as a commercial step forward as much as a sporting one."},
+ {id:"as4",field:"asia",title:"In the Buddha's birthplace, a famous nun's appointment draws fire",source:"The Kathmandu Post",url:"https://kathmandupost.com/art-culture/2026/10/25/in-the-buddha-s-birthplace-a-famous-nun-s-appointment-draws-fire",when:"Oct 25",brief:"In Lumbini, the Buddha's birthplace, the appointment of famous nun Ani Choying Drolma to head the Lumbini development trust has drawn fire. Protesters want her selection annulled. Their objections raise questions about her money and her citizenship. Drolma says every question has been answered. The record, the Post notes, is less certain than that answer suggests. The dispute therefore continues on two levels at once: the appointment itself, and whether the answers given so far settle it."},
+ {id:"e1",field:"europe",title:"Serbia's Vucic concedes defeat in historic snap election with record turnout",source:"France 24",url:"https://www.france24.com/en/europe/20261025-serbia-s-vucic-concedes-defeat-in-historic-snap-election-with-record-turnout",when:"Oct 25",brief:"Serbia's Aleksandar Vucic conceded defeat in a historic election on Sunday. Turnout reached nearly 70 percent at polling stations, the highest since the break-up of Yugoslavia in 1992. The snap election followed nearly two years of student-led demonstrations against perceived corruption and authoritarianism. Those demonstrations were triggered by the deaths of 16 people when a train station canopy collapsed in Novi Sad. Vucic has dominated politics in Serbia since 2014, so his defeat heralds a new political era in the Balkan country. The record turnout underlines how much of the country voted in the election that ended that dominance."},
+ {id:"e2",field:"europe",title:"Marine Le Pen launches presidential campaign in Orléans",source:"France 24",url:"https://www.france24.com/en/video/20261025-marine-le-pen-launches-presidential-campaign-in-orl%C3%A9ans",when:"Oct 25",brief:"Marine Le Pen officially launched her campaign for the French presidential election on Sunday, October 25. The RN candidate did so at a rally in Orléans. She took to the stage at the Zénith Arena in Orléans just before half past four. Analysts place her on the doorstep of the presidency, and she has topped the popularity polls for months in France. She remains a polarising figure, yet one who is deeply and increasingly popular with her base. This launch is her fourth run at the presidency, which is why the campaign is being framed as a question of whether it is fourth time lucky."},
+ {id:"m1",field:"middle-east",title:"Deeply divided Israel braces for pivotal election",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/ckpdgy6pl7xlo",when:"Oct 25",brief:"A deeply divided Israel is bracing for a pivotal election. The vote comes after three years of regional war. In Lucy Williamson's account, this is a battle Israel always knew was coming. The division in the country is the starting point of the piece, not background to it. Years of war form the context in which every campaign argument is now heard. The election is presented as pivotal precisely because that divided country must now choose its leadership at the end of that period."},
+ {id:"m2",field:"middle-east",title:"Israel to close West Bank crossings on election day as crackdown escalates",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/c6y93ylpl5p2o",when:"Oct 25",brief:"Israel will close West Bank crossings on election day. The Israeli Defense Forces has announced restrictions on the movement of Palestinian workers in the run-up to Tuesday's election. The closures are part of that wider set of restrictions taking effect around the vote. For Palestinian workers, the immediate effect is on movement in the days before and on election day itself. The BBC places the announcement inside an escalating crackdown rather than as a routine election measure. Security around the election is therefore shaping daily life well beyond the polling stations."},
+ {id:"m3",field:"middle-east",title:"The bitter row over military service that could shape Israel's future",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/cmvg7w0x742do",when:"Oct 24",brief:"A bitter row over military service is running through Israeli politics. The ultra-Orthodox community is resisting being drafted into the Israeli army. The question the BBC poses is whether that resistance will now bring down the Netanyahu government. Exemption from the draft has long been contested, and the war years have sharpened the argument. If the row breaks the governing coalition, a dispute over service becomes a question of who governs. That is why a conscription argument is being treated as one that could shape Israel's future."},
+ {id:"am1",field:"americas",title:"US measles cases more than double last year's as outbreak spreads",source:"NPR",url:"https://www.npr.org/2026/10/25/nx-s1-6016205/measles-outbreak-pennsylvania",when:"Oct 25",brief:"US measles cases have more than doubled what they were last year as an outbreak spreads. Pennsylvania is the worst-hit state. At least 1,338 cases of measles have been confirmed in 44 counties there so far this year, according to the Pennsylvania Department of Health. Those figures make Pennsylvania the centre of a national increase, not an isolated cluster. A caseload spread across 44 counties suggests sustained transmission rather than a single point of exposure. The doubling against last year is the measure of how far the outbreak has grown."},
+ {id:"am2",field:"americas",title:"Venezuela's opposition leader María Corina Machado returns after months in exile",source:"NPR",url:"https://www.npr.org/2026/10/25/nx-s1-6016222/venezuela-maria-corina-machado-leader-returns-exile",when:"Oct 25",brief:"Venezuela's opposition leader María Corina Machado has returned after months in exile. She announced her arrival on social media. Her message was short: 'I am here. With you.' The return ends a period in which the opposition's most prominent figure was outside the country. Announcing it herself, in those words, frames the arrival as a statement to supporters as much as a travel fact. What her presence inside Venezuela changes for the opposition is now the live question."},
+ {id:"am3",field:"americas",title:"Blanche defends DOJ lawsuit blocking Alaska Senate results if Republican loses",source:"NPR",url:"https://www.npr.org/2026/10/25/nx-s1-6016212/blanche-defends-doj-lawsuit-blocking-alaska-senate-results-if-republican-loses",when:"Oct 25",brief:"Attorney General Todd Blanche has defended the Justice Department's lawsuit over Alaska's Senate race. The suit would block Alaska Senate results if the Republican loses. Blanche defended the department's position in an interview on CNN. The defence puts the attorney general personally behind a legal challenge tied to an election outcome. Because the lawsuit turns on who wins, it has drawn attention beyond Alaska's own count. The interview is the administration's public case for why the suit should stand."},
+ {id:"p1",field:"politics",title:"Burnham to double spending on homelessness in drive to end rough sleeping",source:"The Guardian",url:"https://www.theguardian.com/society/2026/oct/25/homelessness-rough-sleeping-double-spending-burnham",when:"Oct 25",brief:"Andy Burnham is to double spending on ending rough sleeping to almost £900m by the end of the current parliament. Downing Street will allocate a further £432m in this week's budget, bringing total funding for finding a 'lasting solution' to nearly £900m. The prime minister has pledged to offer every rough sleeper in England a route off the streets. The push is framed as a drive to get people off the streets by Christmas. Doubling the money signals that the existing effort was judged insufficient for that pledge. The budget allocation this week is the first concrete step in the stepped-up effort."},
+ {id:"p2",field:"politics",title:"Cabinet split emerges over controversial Rosebank oilfield decision",source:"The Guardian",url:"https://www.theguardian.com/environment/2026/oct/25/cabinet-split-emerges-over-controversial-rosebank-oilfield-decision",when:"Oct 25",brief:"A cabinet split has emerged over whether to approve drilling at the Rosebank oilfield. The chancellor, John Healey, is in favour of the controversial North Sea project. The energy secretary, Miatta Fahnbulleh, has said she is leaning towards rejecting it. Fahnbulleh is ultimately in charge of the decision, which sets the two positions against each other inside the same cabinet. The split is therefore not about whether the decision matters, but about which way it should go. Rosebank has become the project on which that disagreement is now public."},
+ {id:"p3",field:"politics",title:"Cabinet ministers back Burnham's call for debate on return to free movement with EU",source:"The Guardian",url:"https://www.theguardian.com/politics/2026/oct/25/burnham-rayner-labour-eu-free-movement-brexit",when:"Oct 25",brief:"Andy Burnham's call for the UK to consider a return to free movement with Europe has been backed by senior cabinet ministers. Angela Rayner, Ed Miliband and business leaders are among those supporting the prime minister's plea for an honest discussion. Some 'red wall' MPs, however, voice concern that the move could jeopardise Brexit-voting seats. The prime minister is considering different options for a new relationship with Brussels ahead of a summit in November. Support from the cabinet gives the idea weight inside government. The concern from red wall MPs shows the electoral risk that comes with reopening the free movement question at all."},
+ {id:"t1",field:"technology",title:"The datacentre next door: on the frontline of tech's latest David v Goliath battle",source:"The Guardian",url:"https://www.theguardian.com/technology/2026/oct/24/the-datacentre-next-door-on-the-frontline-of-techs-latest-david-v-goliath-battle",when:"Oct 24",brief:"The AI boom is pitting local residents against corporate giants seeking to power their energy-hungry networks. One Welsh city, Newport, is fighting back. The account opens in Dale Johnston's neat suburban garden on the western fringes of Newport, with a trampoline and a slide on the lawn for his grandchildren. That ordinary setting is the point: the datacentre fight has arrived next door to family homes. Residents find themselves cast as David against the Goliaths of the technology industry. The battle is over whether energy-hungry infrastructure belongs in the places now being asked to host it."},
+ {id:"t2",field:"technology",title:"'Black October': cybersecurity experts sound the alarm over new era of AI-enabled hacking",source:"The Guardian",url:"https://www.theguardian.com/technology/2026/oct/23/cybersecurity-ai-hacking-php-vulnerability",when:"Oct 23",brief:"Cybersecurity leaders are sounding the alarm after the discovery of a major vulnerability this week in the PHP programming language. Executives warn of a 'vulnerability tsunami' to come. They predict artificial intelligence tools will expose more fundamental weaknesses in global internet infrastructure in the months ahead. The PHP bug is treated not as a one-off flaw but as an early example of what AI-assisted discovery can find. That is why the warning is about an era, dubbed 'Black October', rather than a single patch. If the prediction holds, defenders face a faster flow of serious vulnerabilities than they are used to."},
+ {id:"t3",field:"technology",title:"Experts cast doubt on Anthropic report detailing how AI has altered work at the company",source:"The Guardian",url:"https://www.theguardian.com/technology/2026/oct/23/anthropic-report-ai-workplace-shifts",when:"Oct 23",brief:"Anthropic claims AI will shift how work gets done and change labour demand. Some experts, however, are skeptical of that vision. The company's report details how AI has altered work at Anthropic itself. Last year its chief executive, Dario Amodei, warned that artificial intelligence could eliminate half of entry-level white-collar jobs. That warning is the backdrop against which the new report is being read. The doubt from outside experts turns the report into a debate about evidence: what one company's experience can, and cannot, show about work everywhere else."},
+ {id:"b1",field:"business",title:"Volkswagen to build $4bn Audi SUV factory in US despite job cuts at home",source:"The Guardian",url:"https://www.theguardian.com/business/2026/oct/25/volkswagen-to-build-4bn-audi-suv-factory-in-us-despite-job-cuts-at-home",when:"Oct 25",brief:"Audi will spend $4bn (£3bn) to build its first factory in the US. The investment, by parent company Volkswagen, will create 4,500 jobs in Georgia. It comes amid steep tariffs imposed by Donald Trump, which have hit the German carmaker. Audi is also contending with intense Chinese competition and a costly shift towards electric vehicles. Its chief executive, Gernot Döllner, announced the move alongside the tariff pressure it answers. Building in the US is therefore both an expansion and a defence: production inside the market the tariffs now guard, while jobs are cut at home."},
+ {id:"b2",field:"business",title:"Oil price rises above $117 a barrel amid fears US will renew strikes on Iran",source:"The Guardian",url:"https://www.theguardian.com/business/2026/oct/23/oil-five-month-high-fears-us-renews-strikes-iran",when:"Oct 23",brief:"Oil has hit its highest level in more than six months as fears of fresh escalation in the Middle East grip energy markets. Brent crude, the international benchmark, rose by about 3.5 percent on Friday to pass $117 a barrel at one point, its highest level since April. The rise follows Tehran threatening retaliatory attacks on Gulf refineries and datacentres. Underneath the price move sits a specific fear: that the US will renew strikes on Iran. Markets are pricing that risk before any strike has happened. A benchmark above $117 shows how quickly geopolitical threats now move the cost of energy."},
+ {id:"b3",field:"business",title:"The young Americans choosing Y2K cars over shiny new SUVs",source:"The Guardian",url:"https://www.theguardian.com/us-news/2026/oct/23/y2k-used-cars-gen-z",when:"Oct 23",brief:"People under 35 in the US are hunting for no-frills cars they can pay for in cash and fix themselves. The trend defies expectations that young buyers will take on steep loans for shiny new SUVs. Jack Price's search is the example given: he joined the marines in fall 2021 knowing he would need a car to get around base and could not afford a new one. A month-long search through dealer classifieds and Facebook Marketplace listings ended when his mother spotted a 20-year-old car. Owners say they get plenty of teasing for the choice. The preference is presented as practical rather than nostalgic: cash, repairability and no loan over newness."},
+ {id:"s1",field:"science",title:"'It's magic': scientists rediscover how to make ancient Roman colour-changing glass",source:"The Guardian",url:"https://www.theguardian.com/science/2026/oct/25/scientists-rediscover-ancient-roman-colour-changing-glass",when:"Oct 25",brief:"Scientists have rediscovered how to make the colour-changing glass behind a 1,600-year-old Roman masterpiece, the Lycurgus Cup. The cup sits in the British Museum and is among the wonders of Roman glass-making. Depending on where a light source is positioned, the glass changes colour. The optical engineering that went into it has baffled experts for centuries. Recreating the effect means recovering a technique Roman craftsmen had and later ages lost. One researcher quoted in the piece sums the result up simply: 'It's magic.'"},
+ {id:"s2",field:"science",title:"US military gives Elon Musk's SpaceX access to sensitive tracking data",source:"The Guardian",url:"https://www.theguardian.com/science/2026/oct/25/spacex-access-sensitive-tracking-data",when:"Oct 25",brief:"The US military has given Elon Musk's SpaceX access to restricted space tracking data. That access gives the company an advantage in tracking objects in orbit. It has also raised national security concerns. Alongside them sit fears of greater control over the space industry concentrating in one company. The advantage is practical: better tracking data means a clearer picture of what is moving in orbit. The concern is the mirror image of that advantage, since the same data is not available to SpaceX's competitors."},
+ {id:"s3",field:"science",title:"Have scientists finally found a way to save the banana from disaster?",source:"The Guardian",url:"https://www.theguardian.com/global-development/2026/oct/22/have-scientists-finally-found-a-way-to-save-the-banana-from-disaster",when:"Oct 22",brief:"Bananas, one of the world's most popular fruits, face a certain-looking disaster from the climate crisis and disease. Researchers are hoping a breakthrough in breeding techniques could give the Cavendish banana a future. The Cavendish is the variety the global trade depends on, which is why its vulnerability matters at scale. Breeding is slow work, so a technique that speeds it up changes what rescue is possible. The question in the headline is genuine: the breakthrough offers a route, not a guarantee. Love them or loathe them, the fruit's popularity is exactly what makes losing it a food story, not just a farming one."},
+ {id:"h1",field:"health",title:"First personalised cancer vaccine cuts risk of disease returning in major trial",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/cq0ld9g9e913o",when:"Oct 23",brief:"The first personalised cancer vaccine has cut the risk of the disease returning in a major trial. The scientists involved say the results could mark a turning point in cancer treatment. A personalised vaccine is made for the individual patient rather than given off the shelf. That is why the result is described as bringing personalised medicine a step closer. The trial's outcome is a reduction in risk of recurrence, not a claim that cancer is cured. Even so, a turning point is how the researchers themselves frame what the trial showed."},
+ {id:"h2",field:"health",title:"GP says she was forced out of job after raising concerns about gender treatment",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/cr5ynl415j79o",when:"Oct 23",brief:"A GP says she was forced out of her job after raising concerns about gender treatment. She says she faced a brutal investigation. The investigation followed her passing on complaints brought to her by other doctors. Her account is therefore about the consequences of relaying concerns, not only about the concerns themselves. Being forced out, on her telling, was the price of having raised them. The case raises the wider question of what happens to clinicians who pass on colleagues' complaints through official channels."},
+ {id:"h3",field:"health",title:"Give more people weight-loss jabs on the NHS, say MPs",source:"BBC News",url:"https://www.bbc.co.uk/news/articles/cm4g1pkwxdqwo",when:"Oct 22",brief:"MPs say more people should be given weight-loss jabs on the NHS. Current plans would see 6 percent of eligible patients get Mounjaro by 2028. MPs call that unambitious. The argument is therefore about pace and coverage rather than about whether the jabs should be offered at all. A plan reaching only 6 percent of those eligible leaves the great majority outside it for years. The MPs' call is for the rollout to be widened beyond the current plan."},
+ {id:"sp1",field:"sport",title:"Kimi Antonelli storms to US Grand Prix victory but is made to wait for title glory",source:"The Guardian",url:"https://www.theguardian.com/sport/2026/oct/25/kimi-antonelli-storms-to-us-f1-gp-victory-but-is-made-to-wait-for-title-glory",when:"Oct 25",brief:"Kimi Antonelli delivered another masterclass at the US Grand Prix in Texas, winning as championship leader. He finished ahead of Charles Leclerc and Max Verstappen. The 20-year-old could not quite seal the Formula One world championship in the Texas sunshine. He should, however, win the title at the next race in Mexico. The performance is described as one of calm assurance that belies his years. Victory without the coronation is the shape of the day: the championship is surely coming, just not yet."},
+ {id:"sp2",field:"sport",title:"Mbappé double secures Real Madrid late victory at Barcelona after Raphinha leveller",source:"The Guardian",url:"https://www.theguardian.com/football/2026/oct/25/barcelona-real-madrid-el-clasico-la-liga-match-report",when:"Oct 25",brief:"Kylian Mbappé scored twice to secure a late victory for Real Madrid at Barcelona in El Clásico. Raphinha had levelled for Barcelona before Madrid's winner. With three minutes left, Jude Bellingham found Eduardo Camavinga to set up one last run. Camavinga sprinted free in the move that decided the match. José Mourinho led Real Madrid into the Camp Nou and out again with the kind of late victory he loves. A clásico settled in the final minutes opens up the title race rather than closing it."},
+ {id:"sp3",field:"sport",title:"NFL roundup: Falcons spoil 49ers' undefeated start; Steelers win in Paris",source:"The Guardian",url:"https://www.theguardian.com/sport/2026/oct/25/nfl-roundup-sunday-football-scores",when:"Oct 25",brief:"Michael Penix Jr threw three touchdown passes as Atlanta handed the San Francisco 49ers their first loss, 29-20. The Falcons scored 13 points off four turnovers in the win. San Francisco were already thin at wide receiver before the defeat. Elsewhere, the Buccaneers routed the Panthers in Baker Mayfield's return. The Browns moved to 5-2 with a late win over the Titans. And the Jets handed the Dolphins their first win of the season, completing a Sunday of upsets and firsts."},
+ {id:"c1",field:"culture",title:"A Course Called Ireland review — why did Bill Murray ever agree to this Irish golf show?",source:"The Guardian",url:"https://www.theguardian.com/tv-and-radio/2026/oct/25/a-course-called-ireland-review-bill-murray-golf-bbc",when:"Oct 25",brief:"A Course Called Ireland is a new documentary in which Bill Murray golfs his way around the 'Emerald Isle'. Along the way he reflects on everything from his great-grandmother to worms. The review, however, finds the Hollywood star so grumpy it is as if he wishes he was not there. Think sulky car journeys and strained encounters. The critic senses a TV series imploding as it goes. That gap, between a delightful premise and a reluctant star, is the whole of the review's argument."},
+ {id:"c2",field:"culture",title:"'There's nothing interesting about me': how Larry David's new biography nearly didn't happen",source:"The Guardian",url:"https://www.theguardian.com/tv-and-radio/2026/oct/25/theres-nothing-interesting-about-me-and-no-interest-in-me-how-larry-davids-new-biography-nearly-didnt-happen",when:"Oct 25",brief:"Emperor of Nothing: The Making of Larry David may be the most begrudgingly authorised biography ever written. Its subject point-blank refused at first. Larry David begged author Blake J. Harris not to talk to people who knew him. Eventually, the Seinfeld and Curb Your Enthusiasm creator relented, and Harris convinced him to 'tolerate' the project. The result is the first authorised biography of David. A book about a man who insisted there was nothing interesting about him is, the piece argues, interesting precisely because of that resistance."},
+ {id:"c3",field:"culture",title:"Stephen Fry: 'Sherlock Holmes altered the course of my whole life'",source:"The Guardian",url:"https://www.theguardian.com/books/2026/oct/25/stephen-fry-sherlock-holmes-altered-the-course-of-my-whole-life",when:"Oct 25",brief:"Stephen Fry says Sherlock Holmes altered the course of his whole life. Nearly a hundred years after Arthur Conan Doyle's last Sherlock Holmes story, the writer and broadcaster unravels the mystery of the detective's enduring appeal. Holmes belongs to a line of imperishable literary heroes, alongside figures like Bond, Jeeves and Poirot, whom contemporary writers keep reinventing. Fry's fascination is lifelong rather than professional. His piece asks why this particular detective, of all of them, endures. The answer begins with what Holmes did to one reader's life, his own."}
+];
+var BOOKS=[
+ {id:"bk1",title:"Pride and Prejudice",author:"Jane Austen",genres:["fiction","romance"],subjects:["Courtship — Fiction","Domestic fiction","England — Fiction"],url:"https://www.gutenberg.org/ebooks/1342.html.images",about:"Published in 1813, the novel follows Elizabeth Bennet, who must learn to see past first impressions and hasty judgments. With five daughters and an estate that can only pass to male heirs, the Bennet family faces financial pressure to marry well. When wealthy Mr. Darcy arrives in their countryside neighbourhood, his pride and Elizabeth's prejudice set up misunderstandings, hidden truths and unexpected revelations about character and love. The book's enduring subject is how people misread each other, and what it costs them. It suits readers who enjoy sharp social comedy built on courtship, family pressure and careful observation of manners. Few novels in the catalog balance wit and domestic stakes as evenly as this one.",opening:"It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife."},
+ {id:"bk2",title:"Frankenstein; or, The Modern Prometheus",author:"Mary Wollstonecraft Shelley",genres:["fiction","horror","science-fiction"],subjects:["Gothic fiction","Frankenstein's monster — Fiction","Victor Frankenstein — Fiction"],url:"https://www.gutenberg.org/ebooks/84.html.images",about:"Shelley's Gothic novel of 1818 tells of Victor Frankenstein, a young scientist who creates a living creature from assembled body parts in an unorthodox experiment. When the creature awakens, Victor flees in horror and abandons his creation. The conscious being must navigate a world that fears him, learning language and seeking connection, only to face repeated rejection. Embittered and alone, the creature turns back on the maker who left him. The book is both a horror tale and a study of responsibility: what a creator owes the thing he made. It suits readers drawn to Gothic fiction, early science fiction and stories told through letters and nested accounts.",opening:"To Mrs. Saville, England. St. Petersburgh, Dec. 11th, 17—. You will rejoice to hear that no disaster has accompanied the commencement of an enterprise which you have regarded with such evil forebodings."},
+ {id:"bk3",title:"Moby Dick; or, The Whale",author:"Herman Melville",genres:["fiction","adventure"],subjects:["Adventure stories","Captain Ahab — Fiction","Whaling — Fiction"],url:"https://www.gutenberg.org/ebooks/2701.html.images",about:"Melville's epic novel of 1851 is narrated by the sailor Ishmael. It follows the obsessive quest of Captain Ahab, who commands the whaling ship Pequod in pursuit of Moby Dick, a giant white sperm whale that destroyed his leg. Ahab's monomaniacal hunt for vengeance drives the ship and its diverse crew across the world's oceans. The narrative blends realistic whaling detail with explorations of good, evil, fate and human nature. It is regarded as a cornerstone of American literature. The book suits patient readers who want an adventure story that keeps opening into meditation on obsession and the sea.",opening:"Call me Ishmael. Some years ago — never mind how long precisely — having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world."},
+ {id:"bk4",title:"Alice's Adventures in Wonderland",author:"Lewis Carroll",genres:["fiction","fantasy","childrens"],subjects:["Children's stories","Fantasy fiction","Alice — Juvenile fiction"],url:"https://www.gutenberg.org/ebooks/11.html.images",about:"Carroll's children's novel of 1865 begins when a curious girl named Alice spots a White Rabbit with a pocket watch. She tumbles down a rabbit hole into an extraordinary fantasy world filled with peculiar anthropomorphic creatures. The book is a pioneering work of literary nonsense that plays with logic and language. Illustrated by John Tenniel, it helped transform children's literature from didactic instruction toward delight. Its subjects are listed as children's stories and fantasy fiction, and it has stayed in print for readers of every age. It suits anyone who enjoys wordplay, absurd encounters and a story that treats a child's questions seriously.",opening:"Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it."},
+ {id:"bk5",title:"Dracula",author:"Bram Stoker",genres:["fiction","horror"],subjects:["Gothic fiction","Count Dracula — Fiction","Epistolary fiction"],url:"https://www.gutenberg.org/ebooks/345.html.images",about:"Stoker's Gothic horror novel of 1897 is told through letters, diary entries and newspaper articles. It follows solicitor Jonathan Harker's terrifying encounter with Count Dracula in Transylvania. When the vampire Count travels to England and begins preying on victims in Whitby, a small group led by Professor Abraham Van Helsing must hunt him down. The epistolary form lets the danger assemble piece by piece from ordinary documents. The book became the centrepiece of vampire literature and profoundly shaped popular culture's picture of the vampire. It suits readers who like their horror built slowly, in journals and letters, toward a pursuit across two countries.",opening:"3 May. Bistritz. — Left Munich at 8:35 P. M., on 1st May, arriving at Vienna early next morning; should have arrived at 6:46, but train was an hour late."}
+];
+
+var state={
+  view:"paper",
+  selectedFields:FIELDS.map(function(f){return f.id;}),
+  selectedGenres:[],
+  readStories:{},
+  readBooks:{},
+  finished:false,
+  picker:null
+};
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function visibleStories(){return STORIES.filter(function(s){return state.selectedFields.indexOf(s.field)>=0;});}
+function visibleBooks(){
+  if(state.selectedGenres.length===0) return BOOKS.slice();
+  return BOOKS.filter(function(b){return b.genres.some(function(g){return state.selectedGenres.indexOf(g)>=0;});});
+}
+function totalVisible(){return state.view==="books"?visibleBooks().length:visibleStories().length;}
+function readVisible(){
+  if(state.view==="books") return visibleBooks().filter(function(b){return state.readBooks[b.id];}).length;
+  return visibleStories().filter(function(s){return state.readStories[s.id];}).length;
+}
+function updateMeta(){
+  var meta=document.getElementById("edition-meta");
+  var mins=Math.max(3,Math.round(STORIES.length*0.8));
+  meta.textContent=STORIES.length+" stories in the full edition · "+BOOKS.length+" books · About "+mins+" minutes unfiltered · Text only";
+  var total=totalVisible(), read=readVisible();
+  var pct=total>0?Math.round(read/total*100):0;
+  document.getElementById("progress-fill").style.width=pct+"%";
+  var bar=document.getElementById("progress");
+  bar.setAttribute("aria-valuemax",String(total)); bar.setAttribute("aria-valuenow",String(read));
+  document.getElementById("progress-label").textContent = state.view==="books"
+    ? read+" of "+total+" books read in your view"
+    : (state.finished && read>=total && total>0 ? "Edition finished in your view." : read+" of "+total+" stories read in your view");
+  document.getElementById("nav-paper").setAttribute("aria-current", state.view==="paper"?"page":"false");
+  document.getElementById("nav-books").setAttribute("aria-current", state.view==="books"?"page":"false");
+  document.getElementById("nav-fields").style.display = state.view==="books" ? "none" : "";
+  document.getElementById("nav-genres").style.display = state.view==="books" ? "" : "none";
+  document.getElementById("nav-fields").setAttribute("aria-current", state.picker==="fields"?"page":"false");
+  document.getElementById("nav-genres").setAttribute("aria-current", state.picker==="genres"?"page":"false");
+}
+function bylineHTML(item,isBook){
+  var read = isBook ? state.readBooks[item.id] : state.readStories[item.id];
+  var link = isBook
+    ? '<a href="'+esc(item.url)+'" target="_blank" rel="noreferrer" aria-label="Read '+esc(item.title)+' free at Project Gutenberg">Read free at Project Gutenberg</a>'
+    : '<a href="'+esc(item.url)+'" target="_blank" rel="noreferrer" aria-label="Read the full story at '+esc(item.source)+': '+esc(item.title)+'">'+esc(item.source)+(item.when?' <span class="when">· '+esc(item.when)+'</span>':'')+'</a>';
+  return '<div class="byline'+(arguments[2]?' center':'')+'">'+link+'<span class="sep" aria-hidden="true">|</span>'
+    +'<button type="button" class="readbtn'+(read?' isread':'')+'" data-read="'+item.id+'" data-kind="'+(isBook?'book':'story')+'" aria-pressed="'+(read?'true':'false')+'" aria-label="'+(read?'Mark as unread: ':'Mark as read: ')+esc(item.title)+'">'+(read?'✓ Read':'Mark read')+'</button></div>';
+}
+function renderPaper(){
+  var root=document.getElementById("paper-root");
+  var groups={};
+  visibleStories().forEach(function(s){(groups[s.field]=groups[s.field]||[]).push(s);});
+  var order=FIELDS.map(function(f){return f.id;}).filter(function(id){return groups[id];});
+  if(order.length===0){root.innerHTML='<p class="empty">No sections in your view. Open Fields and add at least one.</p>';return;}
+  var html="";
+  if(state.finished){
+    html+='<div class="donebox"><p class="big">DONE</p><p>You finished this edition in your view. Nothing more is coming today — the paper ends here. Your finish lives only in this visit; the published edition above is unchanged for everyone else.</p><button type="button" class="btn link" id="reopen-btn">Reopen this edition in your view</button></div>';
+  }
+  order.forEach(function(fid,si){
+    var list=groups[fid];
+    html+='<section class="fieldsec" aria-label="'+esc(FIELD_LABEL[fid])+'"><div class="fieldhead"><div class="row"><span class="side">'+list.length+(list.length===1?' story':' stories')+'</span><h2>'+esc(FIELD_LABEL[fid])+'</h2><span class="side right">Section '+String.fromCharCode(65+si)+'</span></div></div>';
+    var lead = si===0 ? list[0] : null;
+    var rest = lead ? list.slice(1) : list;
+    if(lead){
+      html+='<article class="lead'+(state.readStories[lead.id]?' is-read':'')+'"><h3>'+esc(lead.title)+'</h3>'+bylineHTML(lead,false,true)+'<div class="briefbox"><p class="brief">'+esc(lead.brief)+'</p></div></article>';
+    }
+    if(rest.length>0){
+      html+='<div class="cols'+(lead?' mt':'')+'" style="margin-top:'+(lead?'2.25rem':'1.75rem')+'">';
+      rest.forEach(function(s){
+        html+='<article class="story'+(state.readStories[s.id]?' is-read':'')+'"><h3>'+esc(s.title)+'</h3><p class="brief">'+esc(s.brief)+'</p>'+bylineHTML(s,false)+'</article>';
+      });
+      html+='</div>';
+    }
+    html+='</section>';
+  });
+  html+='<section class="fieldsec" style="border-top:1px solid var(--border);padding-top:1.25rem;text-align:center"><p style="font-style:italic;color:var(--dim);margin:0">This edition\u2019s '+BOOKS.length+' books live in their own section.</p><button type="button" class="btn link" id="goto-books" style="font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:13px">Open the Books tab \u2192</button></section>';
+  if(!state.finished){
+    html+='<div class="finishwrap"><div class="doublerule" aria-hidden="true"></div><div style="padding-top:1.5rem"><button type="button" class="btn solid" id="finish-btn">Finish this edition in your view</button><p>Marks every story in your view read, for this visit only.</p></div></div>';
+  }
+  root.innerHTML=html;
+  var gb=document.getElementById("goto-books"); if(gb) gb.addEventListener("click",function(){state.view="books";closePanels();render();window.scrollTo(0,0);});
+  var fb=document.getElementById("finish-btn"); if(fb) fb.addEventListener("click",function(){visibleStories().forEach(function(s){state.readStories[s.id]=true;});state.finished=true;render();window.scrollTo(0,0);});
+  var rb=document.getElementById("reopen-btn"); if(rb) rb.addEventListener("click",function(){state.finished=false;render();});
+  bindReadButtons(root);
+}
+function renderBooks(){
+  var root=document.getElementById("books-root");
+  var list=visibleBooks();
+  var html='<div class="panel" style="border-top:none;margin-top:1.25rem"><div class="fieldhead"><div class="row"><span class="side">'+BOOKS.length+' books</span><h2>Books</h2><span class="side right">Sunday, October 25, 2026</span></div></div></div>'
+    +'<p style="text-align:center;font-style:italic;color:var(--dim);font-size:16px;line-height:1.6;margin:1rem auto 0;max-width:42rem">Five classics a day — each explained properly, what it is about, its themes, and who it suits, with a taste of its opening lines. Free to read in full at Project Gutenberg. Use Genres above to filter this list in your view only.</p>';
+  if(list.length===0){
+    html+='<p class="empty">No books match the genres in your view. Clear genres to see all five classics.</p>';
+  } else {
+    html+='<div class="cols" style="margin-top:1.75rem">';
+    list.forEach(function(b){
+      html+='<article class="story'+(state.readBooks[b.id]?' is-read':'')+'"><h3 class="it">'+esc(b.title)+'</h3><p class="authorline">by '+esc(b.author)+'</p>'
+        +'<p class="aboutlabel">About this book</p><p class="brief">'+esc(b.about)+'</p>'
+        +'<figure class="opening"><figcaption>Opening lines</figcaption><blockquote>'+esc(b.opening)+'</blockquote></figure>'
+        +(b.subjects.length?'<p class="subjects">'+esc(b.subjects.join(" · "))+'</p>':'')
+        +bylineHTML(b,true)+'</article>';
+    });
+    html+='</div>';
+  }
+  root.innerHTML=html;
+  bindReadButtons(root);
+}
+function bindReadButtons(root){
+  root.querySelectorAll("[data-read]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var id=btn.getAttribute("data-read"), kind=btn.getAttribute("data-kind");
+      if(kind==="book"){ state.readBooks[id]=!state.readBooks[id]; }
+      else { state.readStories[id]=!state.readStories[id]; if(!state.readStories[id]) state.finished=false; }
+      render();
+    });
+  });
+}
+function pickerRow(kind,item,on){
+  return '<li><button type="button" class="pickrow" data-pick="'+kind+':'+item.id+'" aria-pressed="'+(on?'true':'false')+'" aria-label="'+(on?'Remove ':'Add ')+esc(item.label)+'"><span class="lbl">'+esc(item.label)+'</span><span class="mark" aria-hidden="true">'+(on?'✓':'+')+'</span></button></li>';
+}
+function closePicker(){ state.picker=null; closePanels(); render(); }
+function openFields(){
+  state.picker="fields";
+  render();
+  var root=document.getElementById("panel-root");
+  var draft=state.selectedFields.slice();
+  function draw(){
+    var countries=FIELDS.filter(function(f){return f.group==="country";});
+    var scopes=FIELDS.filter(function(f){return f.group==="scope";});
+    var html='<div class="panel"><h2>Your fields</h2><p class="intro">Two kinds of sections: countries and regions bring news from a place, scopes bring a subject from everywhere. Nepal is covered inside Asia, through The Kathmandu Post and Online Khabar. In this public edition the full paper is published for everyone, so saving filters your view of it — sections you remove disappear from your view, sections you add come back, and if you pick only Asia your view shows only Asia. Nothing is stored and nothing changes for anyone else.</p>'
+      +'<h3>Countries &amp; regions</h3><ul class="picklist">'+countries.map(function(f){return pickerRow("field",f,draft.indexOf(f.id)>=0);}).join("")+'</ul>'
+      +'<h3>Scopes</h3><ul class="picklist">'+scopes.map(function(f){return pickerRow("field",f,draft.indexOf(f.id)>=0);}).join("")+'</ul>'
+      +'<div class="panelactions"><button type="button" class="btn solid" id="save-fields" '+(draft.length===0?'disabled style="opacity:.4"':'')+'>Save fields</button>'
+      +'<button type="button" class="btn link" id="close-panel">Cancel</button></div>'
+      +(draft.length===0?'<p class="foot">Pick at least one field.</p>':'')
+      +'</div>';
+    root.innerHTML=html;
+    root.querySelectorAll("[data-pick]").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        var id=btn.getAttribute("data-pick").split(":")[1];
+        var i=draft.indexOf(id); if(i>=0) draft.splice(i,1); else draft.push(id);
+        draw();
+      });
+    });
+    document.getElementById("close-panel").addEventListener("click",closePicker);
+    var save=document.getElementById("save-fields");
+    if(save) save.addEventListener("click",function(){
+      state.selectedFields=FIELDS.map(function(f){return f.id;}).filter(function(id){return draft.indexOf(id)>=0;});
+      closePicker(); window.scrollTo(0,0);
+    });
+  }
+  draw();
+  window.scrollTo(0,0);
+}
+function openGenres(){
+  state.picker="genres";
+  render();
+  var root=document.getElementById("panel-root");
+  var draft=state.selectedGenres.slice();
+  function draw(){
+    var html='<div class="panel" style="max-width:42rem;margin-left:auto;margin-right:auto"><h2>Your book genres</h2><p class="intro">Pick the kinds of books you want in the Books tab. Leave every genre off for a mix of all classics. Saving filters your view of today\u2019s five books to the genres you picked — your view only, for this visit; the published books do not change.</p>'
+      +'<ul class="picklist" style="margin-top:1.25rem">'+GENRES.map(function(g){return pickerRow("genre",g,draft.indexOf(g.id)>=0);}).join("")+'</ul>'
+      +'<p class="foot" aria-live="polite">'+(draft.length===0?'No genres picked — all genres, a mix of classics.':'Your genres: '+GENRES.filter(function(g){return draft.indexOf(g.id)>=0;}).map(function(g){return g.label;}).join(" · "))+'</p>'
+      +'<div class="panelactions"><button type="button" class="btn solid" id="save-genres">Save genres</button>'
+      +'<button type="button" class="btn link" id="close-panel">Cancel</button></div></div>';
+    root.innerHTML=html;
+    root.querySelectorAll("[data-pick]").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        var id=btn.getAttribute("data-pick").split(":")[1];
+        var i=draft.indexOf(id); if(i>=0) draft.splice(i,1); else draft.push(id);
+        draw();
+      });
+    });
+    document.getElementById("close-panel").addEventListener("click",closePicker);
+    document.getElementById("save-genres").addEventListener("click",function(){
+      state.selectedGenres=GENRES.map(function(g){return g.id;}).filter(function(id){return draft.indexOf(id)>=0;});
+      closePicker(); window.scrollTo(0,0);
+    });
+  }
+  draw();
+  window.scrollTo(0,0);
+}
+function closePanels(){document.getElementById("panel-root").innerHTML="";}
+function render(){
+  var isBooks=state.view==="books";
+  var picking=!!state.picker;
+  document.getElementById("paper-root").hidden=isBooks||picking;
+  document.getElementById("books-root").hidden=!isBooks||picking;
+  document.getElementById("public-note").hidden=isBooks||picking;
+  if(!picking){ if(isBooks) renderBooks(); else renderPaper(); }
+  updateMeta();
+}
+document.getElementById("nav-paper").addEventListener("click",function(){state.view="paper";state.picker=null;closePanels();render();window.scrollTo(0,0);});
+document.getElementById("nav-books").addEventListener("click",function(){state.view="books";state.picker=null;closePanels();render();window.scrollTo(0,0);});
+document.getElementById("nav-fields").addEventListener("click",function(){state.view="paper";openFields();});
+document.getElementById("nav-genres").addEventListener("click",function(){state.view="books";openGenres();});
+render();
+</script>
+</body>
+</html>
